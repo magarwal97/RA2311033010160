@@ -22,11 +22,11 @@
 
 const VALID_STACKS = ['frontend', 'backend'];
 
-const VALID_LEVELS = ['debug', 'info', 'warn', 'error'];
+const VALID_LEVELS = ['debug', 'info', 'warn', 'error', 'fatal'];
 
 const VALID_PACKAGES = {
-  backend: ['handler', 'repository', 'route', 'service'],
-  frontend: ['api', 'component', 'hook', 'page', 'state', 'utils'],
+  backend: ['cache', 'controller', 'cron_job', 'db', 'domain', 'handler', 'repository', 'route', 'service'],
+  frontend: ['api', 'component', 'hook', 'page', 'state', 'style', 'utils'],
   shared: ['auth', 'config', 'middleware', 'utils'],
 };
 
@@ -102,6 +102,7 @@ const LEVEL_COLORS = {
   info: '\x1b[32m',    // Green
   warn: '\x1b[33m',    // Yellow
   error: '\x1b[31m',   // Red
+  fatal: '\x1b[35m',   // Magenta
 };
 
 const RESET_COLOR = '\x1b[0m';
@@ -119,6 +120,7 @@ function consoleLog(stack, level, pkg, message) {
   const formattedMessage = `${color}[${timestamp}] [${level.toUpperCase()}] [${stack}/${pkg}] ${message}${RESET_COLOR}`;
 
   switch (level) {
+    case 'fatal':
     case 'error':
       console.error(formattedMessage);
       break;
@@ -310,6 +312,7 @@ export function createLogger(stack, pkg) {
     info: (message) => Log(stack, 'info', pkg, message),
     warn: (message) => Log(stack, 'warn', pkg, message),
     error: (message) => Log(stack, 'error', pkg, message),
+    fatal: (message) => Log(stack, 'fatal', pkg, message),
   };
 }
 

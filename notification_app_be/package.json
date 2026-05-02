@@ -1,0 +1,13 @@
+{
+  "name": "notification-app-be",
+  "version": "1.0.0",
+  "description": "Backend components for the campus notification system",
+  "type": "module",
+  "scripts": {
+    "priority": "node priority_inbox.js",
+    "priority:10": "node priority_inbox.js 10",
+    "priority:15": "node priority_inbox.js 15",
+    "priority:20": "node priority_inbox.js 20"
+  },
+  "license": "ISC"
+}
